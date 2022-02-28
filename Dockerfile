@@ -8,8 +8,8 @@ RUN npm run build
 
 FROM node:17-alpine3.14
 WORKDIR /app
-COPY --from=bundler /frontend/.next ./
-COPY --from=bundler /frontend/node_modules .
+COPY --from=bundler /frontend/.next ./next
+COPY --from=bundler /frontend/node_modules ./
 COPY package.json package-lock.json ./
 
 EXPOSE 3000
