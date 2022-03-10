@@ -5,7 +5,7 @@ DOMAIN ?=  qlniu
 IMG ?= ${DOMAIN}/$(REGISTRY_PROJECT)
 
 
-TAGPREFIX = v1.0.0
+TAGPREFIX = v1.0.1
 
 TAG := ${TAGPREFIX}
 
