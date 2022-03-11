@@ -33,7 +33,7 @@ async function asyncPool(
       }
     }
   }
-  return Promise.allSettled(ret);
+  return Promise.all(ret);
 }
 
 export { asyncPool };

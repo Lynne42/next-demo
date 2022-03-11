@@ -19,6 +19,9 @@ const Home: NextPage = () => {
             <Link href="/file">
               <a>大文件上传，下载</a>
             </Link>
+            <Link href="/promise">
+              <a>promise</a>
+            </Link>
           </li>
         </ul>
       </main>
