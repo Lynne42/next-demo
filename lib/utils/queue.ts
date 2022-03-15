@@ -1,3 +1,13 @@
+export type RunFunction = (...rest: any) => Promise<unknown>;
+
+
+export interface Queue {
+	size: number;
+	dequeue: () => RunFunction | undefined;
+	enqueue: (node: RunFunction) => void;
+  clear: () => void;
+}
+
 class Node {
   value: any;
   next: any;
@@ -6,43 +16,49 @@ class Node {
     this.next = null;
   }
 }
-export default class Queue {
-  headNode: any;
-  tailNode: any;
-  size: number;
+class TaskQueue implements Queue {
+  private _headNode: any;
+  private _tailNode: any;
+  private _count: number;
 
   constructor() {
-    this.headNode = null;
-    this.tailNode = null;
-    this.size = 0;
+    this._headNode = null;
+    this._tailNode = null;
+    this._count = 0;
   }
 
-  enqueue(node: any) {
+  enqueue(node: RunFunction) {
     const newNode = new Node(node);
-    if (this.headNode) {
-      this.tailNode.next = newNode;
-      this.tailNode = newNode;
+    if (this._headNode) {
+      this._tailNode.next = newNode;
+      this._tailNode = newNode;
     } else {
-      this.headNode = newNode;
-      this.tailNode = newNode;
+      this._headNode = newNode;
+      this._tailNode = newNode;
     }
-    this.size++;
+    this._count++;
   }
+
   dequeue() {
-    const current = this.headNode;
+    const current = this._headNode;
     if (!current) {
       return;
     }
-    this.headNode = this.headNode.next;
-    this.size--;
+    this._headNode = this._headNode.next;
+    this._count--;
     return current.value;
   }
+
   clear() {
-    this.headNode = null;
-    this.tailNode = null;
-    this.size = 0;
+    this._headNode = null;
+    this._tailNode = null;
+    this._count = 0;
   }
-  get count() {
-    return this.size;
+
+  get size(): number {
+    return this._count;
   }
 }
+
+
+export default  TaskQueue;
