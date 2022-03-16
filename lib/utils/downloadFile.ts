@@ -17,6 +17,11 @@ export const getContentLength = (url: string) => {
   });
 };
 
+/**
+ * 获取分片信息
+ * @param params 
+ * @returns 
+ */
 export type GetChunksParams = {
   chunkSize: number;
   contentLength: number;
@@ -26,6 +31,7 @@ export type GetChunksResult = {
   end: number;
   index: number;
 };
+
 export const getChunks = (params: GetChunksParams): GetChunksResult[] => {
   const { chunkSize, contentLength } = params;
   const chunks =

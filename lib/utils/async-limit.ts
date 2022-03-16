@@ -15,7 +15,9 @@ class Test extends EventEmitter {
 const a = new Test();
 console.log(1, a);
 
-class AsyncPool extends EventEmitter {
+class AsyncPool extends EventEmitter<
+"active" | "idle" | "add" | "next" | "completed" | "error"
+> {
   private _concurrency: number;
   private _pendingCount: number;
 
@@ -23,7 +25,6 @@ class AsyncPool extends EventEmitter {
 
   constructor(options: Options) {
     super();
-    console.log(55555, this);
     this._queue = new TaskQueue();
     this._concurrency = options.concurrency;
     this._pendingCount = 0;
@@ -32,7 +33,6 @@ class AsyncPool extends EventEmitter {
   async run(fn: RunFunction, resolve: any, rest: any) {
     this._pendingCount++;
     const result = (async () => fn(...rest))();
-
     resolve(result);
     try {
       await result;
@@ -50,33 +50,39 @@ class AsyncPool extends EventEmitter {
   }
 
   tryToStartAnother(): boolean {
+    console.log('torun', `pending: ${this._pendingCount}`, `limit: ${this._concurrency}`, `size: ${this._queue.size}`)
     if (this._queue.size) {
-      const job = this._queue.dequeue();
-      if (!job) {
-        return false;
+      if (this._pendingCount < this._concurrency) {
+        const job = this._queue.dequeue();
+        if (!job) {
+          return false;
+        }
+        this.emit("active");
+        job();
+        return true;
+      } else {
+          Promise.resolve();
+          return false;
       }
-      this.emit("active");
-      job();
-      return true;
+    } else {
+        this.emit("idle");
+        return false;
     }
-    return false;
   }
 
   enqueue(fn: RunFunction, resolve: any, rest: any) {
-    
     this._queue.enqueue(this.run.bind(this, fn, resolve, rest));
     this.emit("add");
+    this.tryToStartAnother();
   }
 
   add(runfn: RunFunction, ...rest: any): Promise<unknown> {
     const that = this;
     return new Promise((resolve) => that.enqueue(runfn, resolve, rest));
   }
-
-  addAll(runfns: RunFunction[]): Promise<unknown> {
-    return Promise.allSettled(
-      runfns.map((item: RunFunction) => this.add(item))
-    );
+  
+  addAll(runfns: RunFunction[]): Promise<unknown>[] {
+    return runfns.map((item: RunFunction) => this.add(item))
   }
 
   get size(): number {
