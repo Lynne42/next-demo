@@ -7,14 +7,6 @@ interface Options {
   concurrency: number;
 }
 
-class Test extends EventEmitter {
-  constructor() {
-    super();
-  }
-}
-const a = new Test();
-console.log(1, a);
-
 class AsyncPool extends EventEmitter<
 "active" | "idle" | "add" | "next" | "completed" | "error"
 > {

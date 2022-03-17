@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import PQueue from "p-queue";
 
@@ -20,6 +20,9 @@ import pLimit from "../lib/utils/p-limit";
 
 import { toCheckTypeFile, toFileSlice, toCalculateMD5 } from "../lib/utils/uploadFile";
 
+import WebWorker from '../lib/utils/webWorker';
+import childThread from '../lib/utils/worker';
+
 const chunkSize = 20 * 1024;
 const url = "http://i.imgur.com/z4d4kWk.jpg";
 const poolLimit = 3;
@@ -30,7 +33,13 @@ const pqueue = new PQueue({ concurrency: poolLimit });
 const asyncLimit = new AsyncLimit({ concurrency: poolLimit });
 
 const File: NextPage = () => {
+  const [worker, setWorker] = useState<Worker>();
+
   useEffect(() => {
+    const worker = new WebWorker(childThread) as Worker;
+    console.log('worker', worker)
+    setWorker(worker);
+
     asyncLimit.on("completed", function () {
       console.log(
         "completed",
@@ -259,10 +268,11 @@ const File: NextPage = () => {
     const chunks = toFileSlice(file, chunkSize);
 
     // 计算MD5
-    toCalculateMD5(file, chunks)
-
-    console.log(444, chunks)
-  }, []);
+    // toCalculateMD5(file, chunks)
+    
+    
+    
+  }, [worker]);
 
   return (
     <div>

@@ -41,7 +41,7 @@ export const toFileSlice = (file: File, chunkSize: number): ChunkFile[] => {
 /**
  * 计算文件MD5值，及分片的MD5值
  */
-export const toCalculateMD5 = (file: File, chunks: ChunkFile[]) => {
+export const toCalculateMD5 = (chunks: ChunkFile[]) => {
   console.time("toCalculateMD5");
   const spark = new SparkMD5.ArrayBuffer();
   const fileReader = new FileReader();
