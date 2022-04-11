@@ -42,7 +42,7 @@ class AsyncPool extends EventEmitter<
   }
 
   tryToStartAnother(): boolean {
-    console.log('torun', `pending: ${this._pendingCount}`, `limit: ${this._concurrency}`, `size: ${this._queue.size}`)
+    
     if (this._queue.size) {
       if (this._pendingCount < this._concurrency) {
         const job = this._queue.dequeue();

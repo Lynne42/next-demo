@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 
 import { useCallback } from "react";
-import styles from "../styles/Home.module.css";
 
 const PromiseComponent: NextPage = () => {
   const handleSetTimeout = useCallback(() => {
@@ -26,7 +25,7 @@ const PromiseComponent: NextPage = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div>
       <button onClick={handleSetTimeout}>setTimeout</button>
       <button onClick={handleOrder}>时序</button>
     </div>
