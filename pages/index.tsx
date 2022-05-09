@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import UnitTest from './unitTest';
 
 const Home: NextPage = () => {
   return (
@@ -11,16 +12,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main >
+      <main className="w-1/2 m-[100px] mx-auto">
         <ul>
-          <li>
-            <Link href="/file">
-              <a>大文件上传，下载</a>
-            </Link>
-            <Link href="/promise">
-              <a>promise</a>
-            </Link>
-          </li>
+          <li><Link href="/file"><a>大文件上传，下载</a></Link></li>
+          <li><Link href="/promise"><a>promise</a></Link></li>
+          <li><Link href="/unitTest"><a>UnitTest</a></Link></li>
         </ul>
       </main>
     </div>

@@ -10,13 +10,11 @@ import {
   pollDownload,
   concatenate,
   saveAs,
-} from "@lib/utils/downloadFile";
+} from "@/lib/uploader/downloadFile";
 
-import AsyncLimit from "@lib/utils/async-limit";
+import AsyncLimit from "@/lib/limit/self-async-limit";
 
-import pLimit from "@lib/utils/p-limit";
-
-import { toCheckTypeFile, toFileSlice } from "@lib/utils/uploadFile";
+import pLimit from "@/lib/limit/p-limit";
 
 const chunkSize = 20 * 1024;
 const url = "http://i.imgur.com/z4d4kWk.jpg";
@@ -28,9 +26,7 @@ const pqueue = new PQueue({ concurrency: poolLimit });
 const asyncLimit = new AsyncLimit({ concurrency: poolLimit });
 
 const PQueueUploaderFile: NextPage = () => {
-
   useEffect(() => {
-
     asyncLimit.on("completed", function () {
       console.log(
         "completed",
@@ -50,7 +46,6 @@ const PQueueUploaderFile: NextPage = () => {
       );
     });
   }, []);
-
 
   /**
    * p-queue 下载
@@ -101,44 +96,14 @@ const PQueueUploaderFile: NextPage = () => {
     console.timeEnd("p-queue 下载");
   }, []);
 
-
-  /**
-   * async limit upload
-   */
-  const handleUploadAsyncLimit = useCallback(async (e) => {
-    const file = e.target.files[0];
-    // 检查文件后缀， 只支持.zip,.tar,.tar.gz文件格式
-    console.log("file", file);
-    const isValid = toCheckTypeFile(file.name, [".zip", ".tar", ".tar.gz"]);
-    if(!isValid) {
-      console.log('上传文件只支持.zip,.tar,.tar.gz文件格式')
-      return
-    }
-    // 检查文件大小
-    // if(file.size > 10 * 1024 * 1024 * 1024) {
-    //   console.log('上传文件大小不能超过10GiB')
-    //   return
-    // }
-
-    // 分片
-    const chunkSize = 5 * 1024 * 1024;
-    const chunks = toFileSlice(file, chunkSize);
-
-    // 计算MD5
-    // toCalculateMD5(file, chunks)
-    
-  }, []);
-
   return (
-    <div>
-      <button onClick={handleDownloadPQueue}>p-queue download</button>
-      <br />
-      <input
-        type="file"
-        onChange={handleUploadAsyncLimit}
-        accept=".zip,.tar,.tar.gz"
-      />
-      async limit upload
+    <div className="m-[12px]">
+      <button
+        className="border border-primary text-primary rounded-[4px] px-[16px] py-[8px]"
+        onClick={handleDownloadPQueue}
+      >
+        p-queue download
+      </button>
     </div>
   );
 };

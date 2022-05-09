@@ -1,0 +1,6 @@
+{
+  
+  "reporters": ["html"],
+  "gitignore": true,
+  "ignore": [".next", "note_modules"]
+}

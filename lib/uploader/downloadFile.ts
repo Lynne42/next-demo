@@ -1,4 +1,4 @@
-import { asyncPool } from "./asyncPool";
+import { asyncPool } from "../limit/asyncPool";
 
 // 获取文件大小
 export const getContentLength = (url: string) => {

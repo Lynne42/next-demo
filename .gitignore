@@ -38,3 +38,5 @@ yarn-error.log*
 *.tsbuildinfo
 node_modules
 .next
+
+report

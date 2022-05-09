@@ -1,30 +1,50 @@
 import type { NextPage } from "next";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   getContentLength,
   getChunks,
   getBinaryContent,
+  pollDownload,
   concatenate,
   saveAs,
 } from "@/lib/uploader/downloadFile";
 
-import pLimit from "@/lib/limit/p-limit";
+import AsyncLimit from "@/lib/limit/self-async-limit";
 
 const chunkSize = 20 * 1024;
 const url = "http://i.imgur.com/z4d4kWk.jpg";
 const poolLimit = 3;
 
-const limit = pLimit(poolLimit);
+const asyncLimit = new AsyncLimit({ concurrency: poolLimit });
 
-
-const PLimitDownloadFile: NextPage = () => {
+const AsyncLimitUploaderFile: NextPage = () => {
+  useEffect(() => {
+    asyncLimit.on("completed", function () {
+      console.log(
+        "completed",
+        `pending: ${asyncLimit.pending}`,
+        `size: ${asyncLimit.size}`,
+        `completed: ${8 - asyncLimit.pending - asyncLimit.size}`
+      );
+    });
+    asyncLimit.on("add", () => {
+      // console.log('add', `pending: ${asyncLimit.pending}`, `size: ${asyncLimit.size}`, )
+    });
+    asyncLimit.on("idle", () => {
+      console.log(
+        "idle",
+        `pending: ${asyncLimit.pending}`,
+        `size: ${asyncLimit.size}`
+      );
+    });
+  }, []);
 
   /**
-   * p-limit 下载
+   * asyncLimit 下载
    */
-  const handleDownloadPlimit = useCallback(async () => {
-    console.time("p-limit 下载");
+  const handleDownloadAsyncLimit = useCallback(async () => {
+    console.time("asyncLimit 下载");
     // 文件大小
     const contentLength = await getContentLength(url);
     console.log("init", contentLength);
@@ -37,7 +57,7 @@ const PLimitDownloadFile: NextPage = () => {
 
     // 并发
     const promiseFetchs = chunkFiles.map((item) =>
-      limit(() =>
+      asyncLimit.add(() =>
         getBinaryContent({
           url,
           start: item.start,
@@ -46,6 +66,7 @@ const PLimitDownloadFile: NextPage = () => {
         })
       )
     );
+
     const results = await Promise.allSettled(promiseFetchs);
 
     const allFetchResult = results
@@ -65,22 +86,19 @@ const PLimitDownloadFile: NextPage = () => {
     // 下载
     saveAs({ buffers, name: "图片", mime: "image/jpg" });
 
-    console.timeEnd("p-limit 下载");
+    console.timeEnd("asyncLimit 下载");
   }, []);
-
-
 
   return (
     <div className="m-[12px]">
       <button
         className="border border-primary text-primary rounded-[4px] px-[16px] py-[8px]"
-        onClick={handleDownloadPlimit}
+        onClick={handleDownloadAsyncLimit}
       >
-        p-limit download
+        asyncLimit download
       </button>
-      
     </div>
   );
 };
 
-export default PLimitDownloadFile;
+export default AsyncLimitUploaderFile;
