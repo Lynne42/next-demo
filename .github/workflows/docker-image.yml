@@ -7,8 +7,10 @@ on:
     branches: [ main ]
 
 jobs:
-  next-build: 
+  next-build:
+
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v3
 
