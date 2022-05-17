@@ -10,7 +10,7 @@ jobs:
   next-build: 
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: Checkout1
     - uses: actions/checkout@v3
 
     - name: Setup Node.js
