@@ -54,6 +54,6 @@ jobs:
     - name: Build & Deploy image 
       run: |
         docker build . --file CI.Dockerfile --tag next-demo:$(date +%s)
-        docker -- push /qlniu/next-demo/next-demo:$(date +%s)
+        docker push /qlniu/next-demo/next-demo:$(date +%s)
 
 
