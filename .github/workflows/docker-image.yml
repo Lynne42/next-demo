@@ -55,8 +55,8 @@ jobs:
       run: docker build . --file CI.Dockerfile --tag next-demo:$(date +%s)
 
     - name: Push Image
-        uses: docker/build-push-action@v3
-        with:
-          push: true
-          tags: qlniu/next-demo:$(date +%s)
+      uses: docker/build-push-action@v3
+      with:
+        push: true
+        tags: qlniu/next-demo:$(date +%s)
 
