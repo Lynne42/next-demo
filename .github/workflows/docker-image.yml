@@ -7,18 +7,50 @@ on:
     branches: [ main ]
 
 jobs:
-
   next-build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v3
+    - name: checkout Step1
+      uses: actions/checkout@v3
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16'
         cache: 'npm'
         registry-url: 'http://registry.npm.taobao.org'
+
     - name: Install Dependencies
       run: npm ci
+    
+    - name: Build Static Resources
+      run: npm run export
+
+    - name: Upload Next Build
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-output
+        path: |
+          .next
+          public
+        retention-days: 7     
+
+
+  docker-push:
+    needs: next-build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Step2
+      uses: actions/checkout@v3
+
+    - name: Download next build
+      uses: actions/download-artifact@v2
+      with:
+        name: build-output
+
+    - name: Build the Docker image
+      run: docker build . --file CI.Dockerfile --tag next-demo:$(date +%s)
+
