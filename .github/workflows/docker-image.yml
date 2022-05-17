@@ -70,5 +70,5 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: qlniu/next-demo:$(date +%s)
+        tags: ${{secrets.DOCKER_HUB_ACCOUNT}}/next-demo:$(date +%s)
 
