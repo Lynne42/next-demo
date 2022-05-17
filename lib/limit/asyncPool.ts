@@ -23,7 +23,7 @@ async function asyncPool(
     if (poolLimit <= array.length) {
       // 设置异步任务执行完成后要执行的操作
       // 异步任务执行完成后，从正在执行的异步任务队列中去掉异步任务
-      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      const e: any = p.then(() => executing.splice(executing.indexOf(e), 1));
       // 存储要执行的异步任务
       executing.push(e);
 

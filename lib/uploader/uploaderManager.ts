@@ -2,29 +2,30 @@ import { EventEmitter } from 'eventemitter3';
 import UpdateFile from './uploader';
 import { FileStatus, FileTopStatus } from './upload.type';
 
-import {
-  uploadChunkFileApi,
-  uploadFullFileApi,
-  getChunksStatusApi,
-  getFileContinueInfoApi,
-  changeUploadFileApi,
-} from '@lib/api/assets';
+// import {
+//   uploadChunkFileApi,
+//   uploadFullFileApi,
+//   getChunksStatusApi,
+//   getFileContinueInfoApi,
+//   changeUploadFileApi,
+// } from '@lib/api/assets';
 
 type FullFileInfo = {
   md5: string;
   status: 'ok' | 'error';
 };
 type ProgressInfo = {
-  successfulCount: number;
-  totalCount: number;
+  successfulCount?: number;
+  totalCount?: number;
   status?: string;
 };
 
 type CompletedChunkEventContent = {
   taskId?: string;
-  successfulCount: number;
-  totalCount: number;
+  successfulCount?: number | any;
+  totalCount?: number | any;
   status?: 'completed';
+  [str: string]: any;
 };
 
 type CompletedServerChunkStatusEventContent = {
@@ -44,7 +45,7 @@ type FileInfosContent = {
   taskId: string;
   fileInstance?: UpdateFile;
   fullFileInfo?: FullFileInfo;
-  progressInfo?: ProgressInfo;
+  progressInfo?: ProgressInfo & CompletedChunkEventContent;
   serverInfo?: CompletedServerChunkStatusEventContent;
   [propName: string]: any;
 };
@@ -77,11 +78,11 @@ class UploadFilesManage extends EventEmitter<'changeFilesInfoEvent'> {
       
       ...params,
       chunkSize: this.chunkSize,
-      uploadChunkFileApi,
-      uploadFullFileApi,
-      getChunksStatusApi,
-      getFileContinueInfoApi,
-      changeUploadFileApi,
+      // uploadChunkFileApi,
+      // uploadFullFileApi,
+      // getChunksStatusApi,
+      // getFileContinueInfoApi,
+      // changeUploadFileApi,
     });
     this.listenEmitEvent(fileInstance);
     this.fileInfos[taskId] = {

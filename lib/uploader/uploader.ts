@@ -2,7 +2,7 @@ import { EventEmitter } from 'eventemitter3';
 import 'yet-another-abortcontroller-polyfill';
 
 import { message } from 'antd';
-import PLimit from '@/utils/plimit';
+import PLimit from '@/lib/limit/p-limit2';
 import { toFileSlice, toErrorFileSlice, delay } from './upload';
 import type { ChunkFile, ChunksStatusContent } from './upload';
 
@@ -18,12 +18,12 @@ type Params = {
   retryCount?: number;
   retryChunkStatusCount?: number;
   retryFullFileCount?: number;
-  uploadChunkFileApi: Function;
-  uploadFullFileApi: Function;
-  getChunksStatusApi: Function;
-  getFileContinueInfoApi: Function;
-  changeUploadFileApi: Function;
-  category: string;
+  // uploadChunkFileApi?: Function;
+  // uploadFullFileApi?: Function;
+  // getChunksStatusApi?: Function;
+  // getFileContinueInfoApi?: Function;
+  // changeUploadFileApi?: Function;
+  // category: string;
   [str: string]: any;
 };
 
@@ -37,12 +37,12 @@ type Options = {
   retryCount: number;
   retryChunkStatusCount: number;
   retryFullFileCount: number;
-  uploadChunkFileApi: Function;
-  uploadFullFileApi: Function;
-  getChunksStatusApi: Function;
-  getFileContinueInfoApi: Function;
-  changeUploadFileApi: Function;
-  category: string;
+  // uploadChunkFileApi: Function;
+  // uploadFullFileApi: Function;
+  // getChunksStatusApi: Function;
+  // getFileContinueInfoApi: Function;
+  // changeUploadFileApi: Function;
+  // category: string;
   status: string;
   [str: string]: any;
 };

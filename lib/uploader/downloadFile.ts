@@ -1,7 +1,7 @@
 import { asyncPool } from "../limit/asyncPool";
 
 // 获取文件大小
-export const getContentLength = (url: string) => {
+export const getContentLength = (url: string): Promise<number> => {
   return new Promise((resolve, reject) => {
     try {
       fetch(url, {
@@ -78,7 +78,7 @@ const getBinaryContent = (params) => {
   });
 };
 **/
-export const getBinaryContent = (params) => {
+export const getBinaryContent = (params: any) => {
   const { url, start, end, index } = params;
   return new Promise((resolve, reject) => {
     try {
@@ -94,7 +94,7 @@ export const getBinaryContent = (params) => {
       };
       xhr.send();
     } catch (err) {
-      reject(new Error(err));
+      reject(err);
     }
   });
 };
@@ -141,7 +141,7 @@ export const concatenate = (chunksList: any) => {
   );
   if (!sortedBuffers.length) return null;
 
-  let totalLength = sortedBuffers.reduce((acc, value) => acc + value.length, 0);
+  let totalLength = sortedBuffers.reduce((acc: any, value: any) => acc + value.length, 0);
   let result = new Uint8Array(totalLength);
   let length = 0;
   for (let array of sortedBuffers) {
@@ -165,7 +165,7 @@ export const saveAs = (params: SaveAsParams) => {
   a.download = name;
   a.href = blobUrl;
   a.click();
-  URL.revokeObjectURL(blob);
+  URL.revokeObjectURL(blobUrl);
 };
 
 // 并发

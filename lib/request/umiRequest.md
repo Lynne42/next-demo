@@ -1,3 +1,4 @@
+```
 /**
  * 前缀
  * 请求拦截器
@@ -180,3 +181,5 @@ request.interceptors.request.use(requestHandler);
 request.interceptors.response.use(responseHandler);
 
 export default request;
+
+```

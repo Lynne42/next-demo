@@ -30,7 +30,7 @@ const PLimitDownloadFile: NextPage = () => {
     console.log("init", contentLength);
 
     // 分片文件
-    const chunkFiles: GetChunksResult[] = getChunks({
+    const chunkFiles = getChunks({
       chunkSize,
       contentLength,
     });

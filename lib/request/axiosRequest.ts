@@ -126,7 +126,7 @@ axios.interceptors.request.use(
 
 // 响应拦截器
 axios.interceptors.response.use(
-  (response) => {
+  (response: any) => {
     // 请求完成后，从pending队列中移除
     let requestData = getRequestIdentify(response.config);
     removePending(requestData);
@@ -142,7 +142,7 @@ axios.interceptors.response.use(
     }
     /*** 双token登录失败后刷新token处理 start */
     if (status === 403) {
-      if (!config.isRetry) {
+      if (!config?.isRetry) {
         return checkStatus(response, config);
       }
       // 如果重试的接口还报403， 则直接重定向到登录页面
