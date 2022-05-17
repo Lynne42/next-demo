@@ -58,5 +58,5 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: qlniu/next-demo:$(date +%s)
+        tags: https://hub.docker.com/qlniu/next-demo:$(date +%s)
 
