@@ -17,7 +17,7 @@ jobs:
     - uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: npm
+          cache: 'npm'
 
     - name: Install Dependencies
       run: npm ci
@@ -44,4 +44,3 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file CI.Dockerfile --tag next-demo:$(date +%s)
 
-  
