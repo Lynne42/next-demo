@@ -37,12 +37,11 @@ jobs:
 
 
   docker-push:
-    name: Deploy
     needs: next-build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
+    - name: Checkout2
     - uses: actions/checkout@v3
 
     - name: Download next build
