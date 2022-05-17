@@ -14,13 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
     - name: Setup Node.js
     - uses: actions/setup-node@v3
       with:
         node-version: '16'
         cache: 'npm'
         registry-url: 'http://registry.npm.taobao.org'
-
     - name: Install Dependencies
       run: npm ci
