@@ -37,7 +37,7 @@ jobs:
 
 
   build-image:
-    needs: build
+    needs: next-build
     runs-on: ubuntu-latest
 
     steps:
