@@ -28,12 +28,12 @@ jobs:
 
     - name: Upload Next Build         
     - uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: |
-            .next
-            public
-          retention-days: 7     
+      with:
+        name: build
+        path: |
+          .next
+          public
+        retention-days: 7     
 
 
   build-image:
