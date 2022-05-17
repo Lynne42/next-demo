@@ -51,9 +51,12 @@ jobs:
       with:
         name: build-output
 
-    - name: Build & Deploy image 
-      run: |
-        docker build . --file CI.Dockerfile --tag next-demo:$(date +%s)
-        docker push /qlniu/next-demo/next-demo:$(date +%s)
+    - name: Build image 
+      run: docker build . --file CI.Dockerfile --tag next-demo:$(date +%s)
 
+    - name: Push Image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: qlniu/next-demo:$(date +%s)
 
