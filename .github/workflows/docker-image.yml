@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  tag: $(date +%s)
+  tag: date +%s
 
 jobs:
   next-build:
