@@ -55,6 +55,8 @@ jobs:
       env: 
         TAG: $(date +%s)
       run: |
+        echo 2222222
+        echo $TAG
         docker build . --file CI.Dockerfile
         docker tag next-demo:$TAG
 
