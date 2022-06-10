@@ -1,28 +1,30 @@
-import SparkMD5 from 'spark-md5';
+import SparkMD5 from "spark-md5";
 
 export enum FileStatus {
-  'CALCULATE_MD5' = 'CALCULATE_MD5',
-  'CALCULATE_MD5_SUCCESS' = 'CALCULATE_MD5_SUCCESS',
-  'CALCULATE_MD5_FAIL' = 'CALCULATE_MD5_FAIL',
-  'UPLOADING' = 'UPLOADING',
-  'UPLOADING_SUCCESS' = 'UPLOADING_SUCCESS',
-  'UPLOADING_FAIL' = 'UPLOADING_FAIL',
-  'MERGE_SUCCESS' = 'MERGE_SUCCESS',
-  'MERGE_FAIL' = 'MERGE_FAIL',
-  'IMAGE_CREATING' = 'IMAGE_CREATING',
-  'IMAGE_SUCCESS' = 'IMAGE_SUCCESS',
-  'IMAGE_FAIL' = 'IMAGE_FAIL',
+  "INITING_MINIO" = "INITING_MINIO",
+  "INITING_MINIO_FAIL" = "INITING_MINIO_FAIL",
+  "CALCULATE_MD5" = "CALCULATE_MD5",
+  "CALCULATE_MD5_SUCCESS" = "CALCULATE_MD5_SUCCESS",
+  "CALCULATE_MD5_FAIL" = "CALCULATE_MD5_FAIL",
+  "UPLOADING" = "UPLOADING",
+  "UPLOADING_SUCCESS" = "UPLOADING_SUCCESS",
+  "UPLOADING_FAIL" = "UPLOADING_FAIL",
+  "MERGE_SUCCESS" = "MERGE_SUCCESS",
+  "MERGE_FAIL" = "MERGE_FAIL",
+  "IMAGE_CREATING" = "IMAGE_CREATING",
+  "IMAGE_SUCCESS" = "IMAGE_SUCCESS",
+  "IMAGE_FAIL" = "IMAGE_FAIL",
 }
 
 export enum GatherFileFlag {
-  'SUCCESS' = 'SUCCESS',
-  'FAIL' = 'FAIL',
-  'GATHERING' = 'GATHERING',
+  "SUCCESS" = "SUCCESS",
+  "FAIL" = "FAIL",
+  "GATHERING" = "GATHERING",
 }
 
 export enum FileTopStatus {
-  'RETRY' = 'RETRY',
-  'FILERETRY' = 'FILERETRY',
+  "RETRY" = "RETRY",
+  "FILERETRY" = "FILERETRY",
 }
 
 // 检查文件后缀
@@ -49,7 +51,7 @@ export type ChunkFile = {
 // 计算文件MD5值
 export const toCalculateMD5 = (
   file: File,
-  chunkSize: number,
+  chunkSize: number
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
@@ -71,7 +73,7 @@ export const toCalculateMD5 = (
         }
       };
       fileReader.onerror = function () {
-        reject('');
+        reject("");
       };
       function loadNext() {
         const start = currentChunk * chunkSize;
@@ -80,7 +82,7 @@ export const toCalculateMD5 = (
         fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
       }
     } catch (error) {
-      reject('');
+      reject("");
     }
   });
 };

@@ -24,7 +24,6 @@ class MinioClient {
       endpoint: `http://101.43.129.224:9000`,
       s3ForcePathStyle: true,
     });
-    this.bucketName = params.oss_bucket_name;
 
     console.log('minio-client', this.s3);
     this.createBucket();

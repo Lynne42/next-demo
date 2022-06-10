@@ -1,10 +1,7 @@
 /* eslint-disable class-methods-use-this */
-import 'yet-another-abortcontroller-polyfill';
-
 import { message } from 'antd';
 import MinioClient from './minio';
 import PLimit from './plimit';
-import { lStorage } from './storage';
 
 import { FileStatus, toCalculateMD5, toFileSlice } from './file';
 
@@ -287,20 +284,28 @@ class Uploader {
   // 初始化
   async init(initParams: InitParams) {
     // 获取 minio 初始化 参数
-    const isMinioAble: any = this.initMinio();
-    if (typeof isMinioAble === 'boolean' && !isMinioAble) {
-      return;
-    }
-
-    // 初始化minio
-    this.minioClient = new MinioClient(isMinioAble);
-
     const { file, callback } = initParams;
     this.file = file;
     const chunkLen = Math.ceil(file.size / this.chunkSize);
 
     this.chunkLen = chunkLen;
     this.emitterInfo = callback;
+
+    this.uploadFileStatusInfo({
+      status: FileStatus.INITING_MINIO,
+    });
+    // 获取 minio 初始化 参数
+    const isMinioAble: any = await this.initMinio();
+    if (typeof isMinioAble === 'boolean' && !isMinioAble) {
+      this.uploadFileStatusInfo({
+        status: FileStatus.INITING_MINIO_FAIL,
+      });
+      return;
+    }
+
+    // 初始化minio
+    this.minioClient = new MinioClient(isMinioAble);
+
     this.getFileSlice();
 
     this.uploadFileStatusInfo({
@@ -338,7 +343,7 @@ class Uploader {
     }
 
     // 判断是否断点续传
-    const storage = JSON.parse(lStorage.getItem(this.md5));
+    const storage = JSON.parse(localStorage.getItem(this.md5));
     if (storage && storage.uploadId) {
       const isAbort = await this.getListMultipartUploads(storage.uploadId);
       if (typeof isAbort !== 'boolean' && isAbort) {
@@ -355,7 +360,7 @@ class Uploader {
       return;
     }
 
-    lStorage.setItem(
+    localStorage.setItem(
       md5,
       JSON.stringify({
         md5,
