@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import UnitTest from './unitTest';
+import DesignPatterns from './designPatterns';
 
 const Home: NextPage = () => {
   return (
@@ -17,6 +18,7 @@ const Home: NextPage = () => {
           <li><Link href="/promise"><a>promise</a></Link></li>
           <li><Link href="/unitTest"><a>UnitTest</a></Link></li>
           <li><Link href="/echarts"><a>echarts</a></Link></li>
+          <li><Link href="/designPatterns"><a>DesignPatterns</a></Link></li>
         </ul>
       </main>
     </div>
