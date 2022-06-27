@@ -20,6 +20,6 @@ const SingletonInstance: React.FunctionComponent<Props> = () => {
     const singletonInstance = SingletonPattern.getInstance();
 
   }, []);
-  return <section>singletonPattern</section>;
+  return <section>SingletonPattern</section>;
 };
 export default SingletonInstance;

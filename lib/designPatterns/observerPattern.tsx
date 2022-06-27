@@ -1,42 +1,34 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  Duck,
-  MallardDuck,
-  RubberDuck,
-  RedheadDuck,
-  ModalDuck,
-} from "./strategyPattern/index";
+import WeatherDataObserver from "./observerPattern/weatherDataObserver";
+import weatherData from './observerPattern/weatherData';
 
-import { FlyRocketPowered } from './strategyPattern/fly';
 
 interface Props {}
 const ObserverPattern: React.FunctionComponent<Props> = () => {
+  const [dw, setWd] = useState<any>('');
   useEffect(() => {
-    console.log('------ MallardDuck ------')
-    const mallardDuck = new MallardDuck();
-    mallardDuck?.performFly();
-    mallardDuck?.performQuack();
-    console.log('------ MallardDuck ------')
-
-    console.log('------ RubberDuck ------')
-    const rubberDuck = new RubberDuck();
-    rubberDuck?.performFly();
-    rubberDuck?.performQuack();
-    console.log('------ RubberDuck ------')
-
-
-    console.log('------ ModalDuck ------')
-    const modalDuck = new ModalDuck();
-    modalDuck?.performFly();
-    modalDuck.setFlyBehavior(new FlyRocketPowered());
-    modalDuck?.performFly();
-    console.log('------ ModalDuck ------')
-
+    const weatherData1 = new WeatherDataObserver(weatherData);
+    weatherData.setMeasurements(1,2,3);
+    transform(weatherData1);
+    
+    setTimeout(() => {
+      weatherData.setMeasurements(2,2,3);
+      console.log(weatherData1.display())
+      transform(weatherData1);
+    }, 5000)
   }, []);
+
+  const transform = (dw: any) => {
+    const data = dw.display();
+    setWd(`tem: ${data.temperature}, hum: ${data.humidity}, pressure: ${data.pressure}`)
+     
+  }
+
   return (
     <section>
       <h2>ObserverPattern</h2>
+      <span>{dw}</span>
     </section>
   );
 };
