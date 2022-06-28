@@ -7,7 +7,7 @@ class EspressoInstance extends Beverage {
     }
 
     public cost(): number {
-        return 1.2
+        return 1
     }
 }
 

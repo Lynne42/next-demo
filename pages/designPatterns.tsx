@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import SingletonInstance from "@/lib/designPatterns/singletonPattern";
 import ObserverPattern from "@/lib/designPatterns/observerPattern";
 import DecoratorPattern from "@/lib/designPatterns/decoratorPattern";
+import FactoryPattern from '@/lib/designPatterns/factoryPattern';
 
 type Props = {};
 
@@ -17,6 +18,9 @@ const DesignPatterns: React.FunctionComponent<Props> = () => {
       </li>
       <li className="border-b border-slate-200 py-[12px]">
         <DecoratorPattern />
+      </li>
+      <li className="border-b border-slate-200 py-[12px]">
+        <FactoryPattern />
       </li>
     </ul>
   );
