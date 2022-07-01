@@ -20,7 +20,7 @@ export type ChunkFile = {
 };
 export const toFileSlice = (file: File, chunkSize: number): ChunkFile[] => {
   const chunks = Math.ceil(file.size / chunkSize);
-  console.log(33, chunks, file.size, chunkSize);
+  
   const arrChunk: ChunkFile[] = [];
   let start = 0;
   let end = chunkSize;
@@ -57,7 +57,7 @@ export const toCalculateMD5 = (chunks: ChunkFile[]) => {
       loadNext();
     } else {
       console.log("finished loading");
-      console.log(4444, spark.end());
+      
       console.timeEnd('toCalculateMD5');
     }
   };

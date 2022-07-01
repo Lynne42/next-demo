@@ -27,7 +27,7 @@ const ObserverPattern: React.FunctionComponent<Props> = () => {
 
   return (
     <section>
-      <h2>ObserverPattern</h2>
+      <h2 className="font-bold">ObserverPattern</h2>
       <span>{dw}</span>
     </section>
   );

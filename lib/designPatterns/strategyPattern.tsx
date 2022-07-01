@@ -36,7 +36,7 @@ const StrategyPattern: React.FunctionComponent<Props> = () => {
   }, []);
   return (
     <section>
-      <h2>StrategyPattern</h2>
+      <h2 className="font-bold">StrategyPattern</h2>
     </section>
   );
 };

@@ -42,7 +42,6 @@ const RingComponent: React.FunctionComponent<Props> = () => {
       borderRadius: '2px',
 
       formatter: (params: any) => {
-        console.log(1, params);
         if (params.seriesName !== 'real_data') {
           return '';
         }

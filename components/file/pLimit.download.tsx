@@ -27,8 +27,7 @@ const PLimitDownloadFile: NextPage = () => {
     console.time("p-limit 下载");
     // 文件大小
     const contentLength = await getContentLength(url);
-    console.log("init", contentLength);
-
+ 
     // 分片文件
     const chunkFiles = getChunks({
       chunkSize,

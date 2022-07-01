@@ -240,7 +240,7 @@ export default class UploadFile extends EventEmitter<
     const errorChunkList: ChunkFile[] = [];
     results.forEach((result: any, index) => {
       const { status, value, reason } = result;
-      console.log(11111, result)
+   
       if (status === 'fulfilled') {
         if (value.status !== 'ok') {
           errorChunkList.push(subChunks[index]);
@@ -482,7 +482,6 @@ export default class UploadFile extends EventEmitter<
   // 不需要选择文件，重新上传 初始化
   async reInit() {
     this.resetCountProperty();
-    console.log(8888888)
     if (!this._filemd5 || this._filemd5Status === '') {
       this.init();
     } else if (this._filemd5Status === 'error') {

@@ -30,7 +30,7 @@ const FactoryPattern: React.FunctionComponent<Props> = () => {
 
   return (
     <section>
-      <h2>Factory</h2>
+      <h2 className="font-bold">Factory</h2>
       <div className="pl-[20px] py-[12px]">
         {info.split("/").map((item: string, index: number) => (
           <p key={index}>{item}</p>

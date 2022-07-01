@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import SingletonInstance from "@/lib/designPatterns/singletonPattern";
 import ObserverPattern from "@/lib/designPatterns/observerPattern";
 import DecoratorPattern from "@/lib/designPatterns/decoratorPattern";
 import FactoryPattern from '@/lib/designPatterns/factoryPattern';
+import SingletonPatter from '@/lib/designPatterns/singletonPattern';
+import CommandPattern from '@/lib/designPatterns/commandPattern';
 
 type Props = {};
 
@@ -14,13 +15,16 @@ const DesignPatterns: React.FunctionComponent<Props> = () => {
         <ObserverPattern />
       </li>
       <li className="border-b border-slate-200 py-[12px]">
-        <SingletonInstance />
+        <SingletonPatter />
       </li>
       <li className="border-b border-slate-200 py-[12px]">
         <DecoratorPattern />
       </li>
       <li className="border-b border-slate-200 py-[12px]">
         <FactoryPattern />
+      </li>
+      <li className="border-b border-slate-200 py-[12px]">
+        <CommandPattern />
       </li>
     </ul>
   );

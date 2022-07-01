@@ -25,7 +25,7 @@ const DecoratorPattern: React.FunctionComponent<Props> = () => {
 
   return (
     <section>
-      <h2>Decorator</h2>
+      <h2 className="font-bold">Decorator</h2>
       <div className="pl-[20px] py-[12px] border-b border-slate-200 ">
         <p>type: espresso_coffee</p>
         <p>describe: {info.describe}</p>

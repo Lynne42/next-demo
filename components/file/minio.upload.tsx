@@ -21,7 +21,7 @@ const MinioUpload: React.FunctionComponent<Props> = () => {
   const handleUpdateFileStatus = useCallback(
     (params: any) => {
       // 返回当前文件状态，FileStatus(包含上传进度等)
-      console.log('status', params)
+      
       setFileStatus(params);
     },
     [setFileStatus],

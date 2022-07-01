@@ -19,7 +19,6 @@ const childThread = () => {
         loadNext();
       } else {
         console.log("finished loading");
-        console.log(4444, spark.end());
         console.timeEnd("toCalculateMD5");
       }
     };
@@ -37,7 +36,7 @@ const childThread = () => {
 
   webWorker.addEventListener("message", (event) => {
     const result = toCalculateMD5(event.data);
-    console.log(45544, result);
+   
     webWorker.postMessage({
       msg: "消息已收到，好久不见！",
     });

@@ -1,25 +1,13 @@
 import React, { useEffect } from "react";
+import SingleDefault from './singletonPattern/single_default';
 
 interface Props {}
-const SingletonInstance: React.FunctionComponent<Props> = () => {
+const SingletonPatter: React.FunctionComponent<Props> = () => {
   useEffect(() => {
-    class SingletonPattern {
-      static #instance: SingletonPattern = new SingletonPattern();
-
-      private constructor() {}
-
-      getName() {
-        return "ql";
-      }
-
-      public static getInstance() {
-        return SingletonPattern.#instance;
-      }
-    }
-
-    const singletonInstance = SingletonPattern.getInstance();
+    const singleInstance = SingleDefault.getInstance();
+    singleInstance.test();
 
   }, []);
-  return <section>SingletonPattern</section>;
+  return <section className="font-bold">SingletonPattern</section>;
 };
-export default SingletonInstance;
+export default SingletonPatter;
