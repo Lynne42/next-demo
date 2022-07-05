@@ -4,6 +4,9 @@ import DecoratorPattern from "@/lib/designPatterns/decoratorPattern";
 import FactoryPattern from '@/lib/designPatterns/factoryPattern';
 import SingletonPatter from '@/lib/designPatterns/singletonPattern';
 import CommandPattern from '@/lib/designPatterns/commandPattern';
+import AdapterPattern from '@/lib/designPatterns/adapterPattern';
+import TemplatePattern from '@/lib/designPatterns/templatePattern';
+import IteratorPattern from '@/lib/designPatterns/iteratorPattern';
 
 type Props = {};
 
@@ -26,6 +29,18 @@ const DesignPatterns: React.FunctionComponent<Props> = () => {
       <li className="border-b border-slate-200 py-[12px]">
         <CommandPattern />
       </li>
+
+      <li className="border-b border-slate-200 py-[12px]">
+        <AdapterPattern />
+      </li>
+
+      <li className="border-b border-slate-200 py-[12px]">
+        <TemplatePattern />
+      </li>
+      <li className="border-b border-slate-200 py-[12px]">
+        <IteratorPattern />
+      </li>
+      
     </ul>
   );
 };
