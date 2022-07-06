@@ -12,6 +12,7 @@ class MenuItem {
         this.price = price;
     }
 
+
     /**
      * getName
      */
@@ -40,6 +41,17 @@ class MenuItem {
         return this.price;
     }
 
+    /**
+     * getInfo
+     */
+    public getInfo(): string {
+        return `
+        name: ${this.getName()},
+        description: ${this.getDescription()},
+        vegetarian: ${this.getVegetarian()},
+        price: ${this.getPrice()},
+        `
+    }
 }
 
 export default MenuItem;
