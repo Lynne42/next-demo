@@ -2,9 +2,11 @@ import BreakfastMenu from './menu.breakfast';
 import LunchMenu from './menu.lunch';
 import MakeMenu from './make.menu';
 
+import MakeMenuOptimize from './make.menu.optimize';
 
 class InstanceMenu {
     public menu: MakeMenu;
+    public menuOptimize: MakeMenuOptimize;
 
     /**
      * createBreakfast
@@ -12,9 +14,6 @@ class InstanceMenu {
     public createBreakfast(callback: Function) {
         const breakfastMenu = new BreakfastMenu();
         const lunchMenu = new LunchMenu();
-
-        breakfastMenu.makeMenu();
-        lunchMenu.makeMenu();
 
         this.menu = new MakeMenu(breakfastMenu, lunchMenu);
         const str = this.menu.printBreakfastMenu();
@@ -28,9 +27,6 @@ class InstanceMenu {
         const breakfastMenu = new BreakfastMenu();
         const lunchMenu = new LunchMenu();
 
-        breakfastMenu.makeMenu();
-        lunchMenu.makeMenu();
-
         this.menu = new MakeMenu(breakfastMenu, lunchMenu);
         const str = this.menu.printLunchMenu();
         callback(str)
@@ -43,12 +39,25 @@ class InstanceMenu {
         const breakfastMenu = new BreakfastMenu();
         const lunchMenu = new LunchMenu();
 
-        breakfastMenu.makeMenu();
-        lunchMenu.makeMenu();
 
         this.menu = new MakeMenu(breakfastMenu, lunchMenu);
         const str = this.menu.printVegetarianMenu();
         callback(str)
+    }
+
+    /**
+     * createAllMenu
+     */
+    public createAllMenu(callback: Function) {
+        const breakfastMenu = new BreakfastMenu();
+        const lunchMenu = new LunchMenu();
+
+        this.menuOptimize = new MakeMenuOptimize([breakfastMenu, lunchMenu]);
+
+        const str = this.menuOptimize.printMenu();
+
+        callback(str);
+
     }
 
 

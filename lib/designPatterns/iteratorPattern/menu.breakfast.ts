@@ -3,6 +3,10 @@ import IteratorArray from './iterator.array';
 
 class BreakfastMenu {
     public list: MenuItem[] = [];
+
+    constructor() {
+        this.makeMenu();
+    }
     
     /**
      * makeMenu

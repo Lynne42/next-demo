@@ -4,6 +4,10 @@ import IteratorMap from './iterator.map';
 class LunchMenu {
     public list: any= new Map();
     
+    constructor() {
+        this.makeMenu();
+    }
+    
     /**
      * makeMenu
      */

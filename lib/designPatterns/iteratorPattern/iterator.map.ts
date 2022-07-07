@@ -1,5 +1,4 @@
 import Iterator from './iterator.interface';
-import MenuItem from './menuItem.class';
 
 
 class IteratorMap implements Iterator {
@@ -19,7 +18,7 @@ class IteratorMap implements Iterator {
         return true
     }
 
-    next(): MenuItem {
+    next(): any {
         const item = this.arr.get(this.index);
         this.index += 1;
         return item;
