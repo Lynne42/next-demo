@@ -1,7 +1,7 @@
-import BreakfastMenu from './menu.breakfast';
-import LunchMenu from './menu.lunch';
+
 import Iterator from './iterator.interface';
 import MenuItem from './menuItem.class';
+
 
 class MakeMenu {
     public breakfastMenu: BreakfastMenu;

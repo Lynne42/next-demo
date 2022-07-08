@@ -1,3 +1,4 @@
+import Iterator from './iterator.interface';
 abstract class MenuComponent {
 
     public name: string;
@@ -7,11 +8,11 @@ abstract class MenuComponent {
 
     public node: any = null;
 
-    constructor(name: string, description: string, vegetarian: boolean, price: number) {
+    constructor(name: string, description: string, vegetarian?: boolean, price?: number) {
         this.name = name;
         this.description = description;
-        this.vegetarian = vegetarian;
-        this.price = price;
+        this.vegetarian = vegetarian || false;
+        this.price = price || 0;
     }
 
     /**
@@ -70,6 +71,11 @@ abstract class MenuComponent {
     getChild(): any {
         throw new Error('leaf node')
     };
+
+    /**
+     * createIterator
+     */
+    public abstract createIterator: Iterator;
 }
 
 export default MenuComponent;

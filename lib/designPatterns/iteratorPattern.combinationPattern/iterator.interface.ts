@@ -1,7 +1,7 @@
 interface Iterator {
     hasNext(): boolean;
 
-    next(): any;
+    next(): Object;
 }
 
 

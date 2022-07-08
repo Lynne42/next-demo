@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import InstanceMenu from "./iteratorPattern/instance.menu";
+import InstanceMenuCombinationPattern from './iteratorPattern.combinationPattern/instance.menu';
 
 interface Props {}
 const IteratorPattern: React.FunctionComponent<Props> = () => {
@@ -7,6 +8,7 @@ const IteratorPattern: React.FunctionComponent<Props> = () => {
   const [info2, setInfo2] = useState<string>("");
   const [info3, setInfo3] = useState<string>("");
   const [info4, setInfo4] = useState<string>("");
+  const [info5, setInfo5] = useState<string>("");
 
   const callback = useCallback(
     (str: string) => {
@@ -36,6 +38,13 @@ const IteratorPattern: React.FunctionComponent<Props> = () => {
     [setInfo4]
   );
 
+  const callback5 = useCallback(
+    (str: string) => {
+      setInfo5(str);
+    },
+    [setInfo5]
+  );
+
   useEffect(() => {
     const menu = new InstanceMenu();
     menu.createBreakfast(callback);
@@ -45,7 +54,12 @@ const IteratorPattern: React.FunctionComponent<Props> = () => {
     menu.createVegetarian(callback3);
 
     menu.createAllMenu(callback4);
-  }, [callback, callback2, callback3, callback4]);
+
+    const menu2 = new InstanceMenuCombinationPattern();
+    const str = menu2.menus.print();
+    callback5(str)
+
+  }, [callback, callback2, callback3, callback4, callback5]);
 
   return (
     <section>
@@ -65,12 +79,26 @@ const IteratorPattern: React.FunctionComponent<Props> = () => {
           <p key={item}>{item}</p>
         ))}
       </div>
-      <div className="pl-[20px]">
+      <div className="border-b border-slate-200 py-[12px] pl-[20px]">
         {info4.split("-").filter((item) => !!item).map((item, index) => (
           <div key={index}>
             <p>all-{index}</p>
             {item
               .split("|")
+              .filter((item) => !!item)
+              .map((value) => (
+                <p key={value}>{value}</p>
+              ))}
+          </div>
+        ))}
+      </div>
+      <div className="pl-[20px]">
+        <p>iterator - combination</p>
+        {info5.split("|").filter((item) => !!item).map((item, index) => (
+          <div key={index}>
+            
+            {item
+              .split("-")
               .filter((item) => !!item)
               .map((value) => (
                 <p key={value}>{value}</p>

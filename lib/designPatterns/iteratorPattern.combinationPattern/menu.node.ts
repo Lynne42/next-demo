@@ -8,6 +8,11 @@ class Menus extends MenuComponent {
 
     public menus: Array<MenuComponent> = [];
 
+    constructor(name: string, description: string) {
+        super(name, description);
+        
+    }
+
     add(child: MenuComponent): void {
         this.menus.push(child);
     }
@@ -23,7 +28,11 @@ class Menus extends MenuComponent {
     }
 
     print() {
-        
+        return `
+        name: ${this.getName()},
+        description: ${this.getDescription()},
+        menuChild: ${this.printChild()}|,
+        `
     }
 
     private printChild() {
@@ -31,18 +40,9 @@ class Menus extends MenuComponent {
         const iterator = new IteratorArray(this.menus);
         while(iterator.hasNext()) {
             const menu = iterator.next();
-            try {
-                if(menu.getChild()) {
-                    
-                }
-            } catch (err: any) {
-                arr.push(this.printLeaf(menu))
-            }
+            arr.push(menu.print())
         }
-    }
-
-    private printLeaf(menuItem: MenuComponent) {
-        return menuItem.getInfo();
+        return arr.join('-')
     }
 }
 
