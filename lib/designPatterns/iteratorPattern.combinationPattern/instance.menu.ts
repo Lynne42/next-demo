@@ -4,6 +4,8 @@ import MenuComponent from './component';
 import Menus from './menu.node';
 import MenusItem from './menuItem.node';
 
+import IteratorArray from './iterator.array';
+
 class InstanceMenu {
     public breakfastMenu: MenuComponent;
     public lunchMenu: MenuComponent;
@@ -78,6 +80,11 @@ class InstanceMenu {
     public addMenu(name: string, description: string, vegetarian: boolean, price: number) {
         const BreakfastMenu1 = this.addMenuItem(name, description,vegetarian, price);
         this.breakfastMenu.add(BreakfastMenu1);
+    }
+
+    public createIterator() {
+        const iterator = new IteratorArray([this.menus]);
+        return iterator
     }
 
 

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import InstanceMenu from "./iteratorPattern/instance.menu";
 import InstanceMenuCombinationPattern from './iteratorPattern.combinationPattern/instance.menu';
+import IteratorComposite from './iteratorPattern.combinationPattern/iterator.composite';
 
 interface Props {}
 const IteratorPattern: React.FunctionComponent<Props> = () => {
@@ -56,7 +57,17 @@ const IteratorPattern: React.FunctionComponent<Props> = () => {
     menu.createAllMenu(callback4);
 
     const menu2 = new InstanceMenuCombinationPattern();
-    const str = menu2.menus.print();
+    const menuIterator = menu2.createIterator();
+    const treeIterator = new IteratorComposite(menuIterator);
+
+    let str = '';
+    while(treeIterator.hasNext()) {
+      const comp = treeIterator.next();
+      if(comp.getVegetarian()) {
+        str += comp.print() + '-'
+      }
+    }
+    
     callback5(str)
 
   }, [callback, callback2, callback3, callback4, callback5]);

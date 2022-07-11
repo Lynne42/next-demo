@@ -1,5 +1,6 @@
 
 import MenuComponent from './component';
+import IteratorNull from './iterator.null';
 
 class MenuItem extends MenuComponent {
 
@@ -11,7 +12,10 @@ class MenuItem extends MenuComponent {
         return this.getInfo()
     }
 
-    
+    public createIterator() {
+        const iterator = new IteratorNull([]);
+        return iterator
+    }
 }
 
 export default MenuItem;

@@ -75,7 +75,7 @@ abstract class MenuComponent {
     /**
      * createIterator
      */
-    public abstract createIterator: Iterator;
+    public abstract createIterator(): Iterator;
 }
 
 export default MenuComponent;

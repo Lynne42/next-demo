@@ -7,6 +7,7 @@ import CommandPattern from '@/lib/designPatterns/commandPattern';
 import AdapterPattern from '@/lib/designPatterns/adapterPattern';
 import TemplatePattern from '@/lib/designPatterns/templatePattern';
 import IteratorPattern from '@/lib/designPatterns/iteratorPattern';
+import StatePattern from '@/lib/designPatterns/statePattern';
 
 type Props = {};
 
@@ -40,7 +41,9 @@ const DesignPatterns: React.FunctionComponent<Props> = () => {
       <li className="border-b border-slate-200 py-[12px]">
         <IteratorPattern />
       </li>
-      
+      <li className="border-b border-slate-200 py-[12px]">
+        <StatePattern />
+      </li>
     </ul>
   );
 };

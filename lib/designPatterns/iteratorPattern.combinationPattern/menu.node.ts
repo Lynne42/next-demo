@@ -2,6 +2,7 @@
 import MenuComponent from './component';
 import IteratorArray from './iterator.array';
 import Iterator from './iterator.interface';
+import IteratorComposite from './iterator.composite';
 
 
 class Menus extends MenuComponent {
@@ -27,6 +28,10 @@ class Menus extends MenuComponent {
         return iterator;
     }
 
+    public getVegetarian(): boolean {
+        return false;
+    }
+
     print() {
         return `
         name: ${this.getName()},
@@ -43,6 +48,11 @@ class Menus extends MenuComponent {
             arr.push(menu.print())
         }
         return arr.join('-')
+    }
+
+    public createIterator() {
+        const iterator = new IteratorArray(this.menus);
+        return iterator
     }
 }
 
