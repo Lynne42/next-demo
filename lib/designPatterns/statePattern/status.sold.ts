@@ -1,8 +1,5 @@
 import StatusInterface from "./interface.status";
 
-import { Status } from './interface.status';
-
-
 class StatusSold implements StatusInterface {
   public instance: any;
   constructor(instance: any) {
@@ -29,9 +26,9 @@ class StatusSold implements StatusInterface {
 
     let nowStatus = '';
     if(count > 0) {
-        nowStatus = Status.no_money;
+        nowStatus = this.instance.statusNoMoney;
     } else {
-        nowStatus = Status.sold_out;
+        nowStatus = this.instance.statusSoldout;
     }
 
     this.instance.updateStatus(nowStatus);

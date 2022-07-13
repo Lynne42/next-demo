@@ -1,7 +1,5 @@
 import StatusInterface from "./interface.status";
 
-import { Status } from './interface.status';
-
 
 class StatusHasMoney implements StatusInterface {
   public instance: any;
@@ -14,13 +12,13 @@ class StatusHasMoney implements StatusInterface {
 
   ejectYuan() {
     console.log('返还硬币');
-    this.instance.updateStatus(Status.no_money);
+    this.instance.updateStatus(this.instance.statusNoMoney);
   }
 
   turnSelect() {
     console.log('选择产品');
-    this.instance.updateStatus(Status.sold);
-    this.dispense();
+    this.instance.updateStatus(this.instance.statusSold);
+   
   }
 
   dispense() {
@@ -29,9 +27,9 @@ class StatusHasMoney implements StatusInterface {
 
     let nowStatus = '';
     if(count > 0) {
-        nowStatus = Status.no_money;
+        nowStatus = this.instance.statusNoMoney;
     } else {
-        nowStatus = Status.sold_out;
+        nowStatus = this.instance.statusSoldout;
     }
 
     this.instance.updateStatus(nowStatus);
