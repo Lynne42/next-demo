@@ -1,5 +1,5 @@
 
-import { Observer } from './type.observer';
+import { Observer } from './interface.observer';
 
 export interface Subject {
     // new(): Subject;

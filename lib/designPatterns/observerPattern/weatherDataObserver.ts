@@ -13,8 +13,8 @@
 ****************     end   ***************** */
 
 
-import type { Observer } from "./type.observer";
-import type { Subject } from "./type.subject";
+import type { Observer } from "./interface.observer";
+import type { Subject } from "./interface.observable";
 
 class WeatherDataObserver implements Observer {
   private temperature: number = 0;

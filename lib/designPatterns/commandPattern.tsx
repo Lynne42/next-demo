@@ -10,6 +10,7 @@ const CommandPattern: React.FunctionComponent<Props> = () => {
   return (
     <section>
       <h2 className="font-bold">CommandPattern</h2>
+      
     </section>
   );
 };
