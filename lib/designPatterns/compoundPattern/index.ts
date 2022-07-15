@@ -1,4 +1,4 @@
-import View from './view';
+import View from './view.beat';
 import ViewOption from './view.option';
 
 import Modal from './modal.beat';
@@ -8,7 +8,6 @@ import Controller from './controller.beat';
 class Root {
 
   view: View;
-  viewOption: ViewOption;
 
   modal: Modal;
 
@@ -19,28 +18,29 @@ class Root {
     this.controller = new Controller(this.modal);
     
     this.view = new View(this.controller, this.modal);
-    this.viewOption = new ViewOption(this.controller, this.modal);
 
+    this.view.createView();
+    
   }
 
   init(callback: Function) {
     let str = [];
-    this.viewOption.on();
-    str.push(`${this.view.print()}, ${this.viewOption.print()}`);
+    this.view.viewOption.on();
+    str.push(`${this.view.print()}, ${this.view.viewOption.print()}`);
 
-    this.viewOption.increase();
-    str.push(`${this.view.print()}, ${this.viewOption.print()}`);
+    this.view.viewOption.increase();
+    str.push(`${this.view.print()}, ${this.view.viewOption.print()}`);
 
-    this.viewOption.increase();
-    str.push(`${this.view.print()}, ${this.viewOption.print()}`);
+    this.view.viewOption.increase();
+    str.push(`${this.view.print()}, ${this.view.viewOption.print()}`);
 
-    this.viewOption.decrease();
-    str.push(`${this.view.print()}, ${this.viewOption.print()}`);
+    this.view.viewOption.decrease();
+    str.push(`${this.view.print()}, ${this.view.viewOption.print()}`);
 
-    this.viewOption.off();
+    this.view.viewOption.off();
 
-    str.push(`${this.view.print()}, ${this.viewOption.print()}`);
-    
+    str.push(`${this.view.print()}, ${this.view.viewOption.print()}`);
+
     callback(str)
   }
 
