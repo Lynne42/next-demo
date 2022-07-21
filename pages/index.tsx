@@ -3,8 +3,10 @@ import Head from "next/head";
 import Link from "next/link";
 import UnitTest from './unitTest';
 import DesignPatterns from './designPatterns';
+import { useEffect } from "react";
 
 const Home: NextPage = () => {
+
   return (
     <div>
       <Head>
